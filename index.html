@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자기소개</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        h2 {
+            color: #764ba2;
+            margin: 25px 0 15px;
+            font-size: 1.3em;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        strong {
+            color: #667eea;
+        }
+
+        em {
+            color: #764ba2;
+            font-style: normal;
+            background: #f0e6ff;
+            padding: 2px 8px;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border: none;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f8f8;
+        }
+
+        tr:nth-child(odd) td {
+            background: #fff;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 25px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .color-buttons {
+            margin-top: 25px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .color-btn {
+            width: 40px;
+            height: 40px;
+            border: 3px solid white;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .color-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .editable-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .editable-row p {
+            margin-bottom: 0;
+            flex: 1;
+        }
+
+        .edit-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 5px 14px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8em;
+            white-space: nowrap;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .edit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .edit-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            font-size: 0.95em;
+            font-family: 'Segoe UI', sans-serif;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .edit-input:focus {
+            border-color: #764ba2;
+        }
+
+        td .edit-btn {
+            margin-left: 8px;
+        }
+
+        td .edit-input {
+            width: 100%;
+        }
+
+        .td-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .td-content span {
+            flex: 1;
+        }
+
+        .user-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .user-tab {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s;
+            color: white;
+            opacity: 0.6;
+        }
+
+        .user-tab:hover {
+            opacity: 0.8;
+            transform: translateY(-2px);
+        }
+
+        .user-tab.active {
+            opacity: 1;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transform: scale(1.05);
+        }
+
+        .user-name {
+            font-size: 0.9em;
+            color: #888;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="user-tabs" id="user-tabs">
+            <!-- 유저 탭이 동적으로 생성됩니다 -->
+        </div>
+
+        <h1>간단한 자기소개</h1>
+        <p class="user-name" id="user-name-display"></p>
+
+        <div class="editable-row">
+            <p id="intro-text">안녕하세요! 저는 <strong>코딩</strong>을 좋아하는 사람입니다.</p>
+            <button class="edit-btn" onclick="toggleEdit('intro')">수정</button>
+        </div>
+
+        <div class="editable-row">
+            <p id="hobby-text">취미는 <em>음악 듣기</em>와 <em>산책</em>입니다.</p>
+            <button class="edit-btn" onclick="toggleEdit('hobby')">수정</button>
+        </div>
+
+        <h2>연락처</h2>
+        <table>
+            <tr>
+                <th>항목</th>
+                <th>내용</th>
+            </tr>
+            <tr>
+                <td>이메일</td>
+                <td>
+                    <div class="td-content">
+                        <span id="email-text">hello@example.com</span>
+                        <button class="edit-btn" onclick="toggleEdit('email')">수정</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>전화</td>
+                <td>
+                    <div class="td-content">
+                        <span id="phone-text">010-1234-5678</span>
+                        <button class="edit-btn" onclick="toggleEdit('phone')">수정</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <div class="editable-row" style="margin-top: 15px;">
+            <a href="https://www.google.com" id="link-text">구글로 이동</a>
+            <button class="edit-btn" onclick="toggleEdit('link')">수정</button>
+        </div>
+
+        <div class="color-buttons">
+            <button class="color-btn" style="background: linear-gradient(135deg, #667eea, #764ba2);" onclick="changeColor('#667eea', '#764ba2')"></button>
+            <button class="color-btn" style="background: linear-gradient(135deg, #f093fb, #f5576c);" onclick="changeColor('#f093fb', '#f5576c')"></button>
+            <button class="color-btn" style="background: linear-gradient(135deg, #4facfe, #00f2fe);" onclick="changeColor('#4facfe', '#00f2fe')"></button>
+            <button class="color-btn" style="background: linear-gradient(135deg, #43e97b, #38f9d7);" onclick="changeColor('#43e97b', '#38f9d7')"></button>
+            <button class="color-btn" style="background: linear-gradient(135deg, #fa709a, #fee140);" onclick="changeColor('#fa709a', '#fee140')"></button>
+            <button class="color-btn" style="background: linear-gradient(135deg, #30cfd0, #330867);" onclick="changeColor('#30cfd0', '#330867')"></button>
+        </div>
+    </div>
+
+    <script>
+        let currentUserId = 1;
+        let currentColor1 = '#667eea';
+        let currentColor2 = '#764ba2';
+        let users = [];
+
+        // 페이지 로드 시 유저 목록과 프로필 불러오기
+        document.addEventListener('DOMContentLoaded', init);
+
+        async function init() {
+            await loadUsers();
+            await loadProfile(currentUserId);
+        }
+
+        async function loadUsers() {
+            try {
+                const res = await fetch('/api/users');
+                users = await res.json();
+                renderUserTabs();
+            } catch (err) {
+                console.log('유저 목록 로드 실패:', err);
+            }
+        }
+
+        function renderUserTabs() {
+            const tabsContainer = document.getElementById('user-tabs');
+            tabsContainer.innerHTML = '';
+
+            users.forEach(user => {
+                const tab = document.createElement('button');
+                tab.className = 'user-tab' + (user.id === currentUserId ? ' active' : '');
+                tab.style.background = `linear-gradient(135deg, ${user.color1}, ${user.color2})`;
+                tab.textContent = user.name;
+                tab.onclick = () => selectUser(user.id);
+                tabsContainer.appendChild(tab);
+            });
+        }
+
+        async function selectUser(userId) {
+            currentUserId = userId;
+
+            // 탭 활성화 상태 업데이트
+            document.querySelectorAll('.user-tab').forEach((tab, index) => {
+                tab.classList.toggle('active', users[index].id === userId);
+            });
+
+            await loadProfile(userId);
+        }
+
+        async function loadProfile(userId) {
+            try {
+                const res = await fetch(`/api/profile/${userId}`);
+                const data = await res.json();
+
+                if (data) {
+                    document.getElementById('user-name-display').textContent = data.name ? `@${data.name}` : '';
+                    if (data.intro) document.getElementById('intro-text').textContent = data.intro;
+                    if (data.hobby) document.getElementById('hobby-text').textContent = data.hobby;
+                    if (data.email) document.getElementById('email-text').textContent = data.email;
+                    if (data.phone) document.getElementById('phone-text').textContent = data.phone;
+                    if (data.link_text) document.getElementById('link-text').textContent = data.link_text;
+                    if (data.link_url) document.getElementById('link-text').href = data.link_url;
+                    if (data.color1 && data.color2) {
+                        changeColor(data.color1, data.color2, false);
+                    }
+                }
+            } catch (err) {
+                console.log('프로필 로드 실패:', err);
+            }
+        }
+
+        async function saveProfile(field, value) {
+            try {
+                const body = {};
+                body[field] = value;
+
+                const res = await fetch(`/api/profile/${currentUserId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+
+                const result = await res.json();
+                if (result.success) {
+                    console.log('저장 완료:', field);
+                    // 색상 변경 시 탭도 업데이트
+                    if (field === 'color1' || field === 'color2') {
+                        await loadUsers();
+                    }
+                }
+            } catch (err) {
+                console.error('저장 실패:', err);
+            }
+        }
+
+        function changeColor(color1, color2, save = true) {
+            currentColor1 = color1;
+            currentColor2 = color2;
+            document.body.style.background = `linear-gradient(135deg, ${color1} 0%, ${color2} 100%)`;
+            document.querySelector('h1').style.color = color1;
+            document.querySelector('h2').style.color = color2;
+            document.querySelectorAll('th').forEach(th => th.style.background = color1);
+            document.querySelector('a').style.background = `linear-gradient(135deg, ${color1}, ${color2})`;
+
+            if (save) {
+                saveProfile('color1', color1);
+                saveProfile('color2', color2);
+            }
+        }
+
+        function toggleEdit(field) {
+            const textEl = document.getElementById(field + '-text');
+            const btn = textEl.closest('.editable-row, .td-content').querySelector('.edit-btn');
+
+            if (btn.textContent === '수정') {
+                const currentText = field === 'link' ? textEl.href : textEl.textContent;
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.value = currentText;
+                input.className = 'edit-input';
+                input.id = field + '-input';
+                textEl.style.display = 'none';
+                textEl.parentNode.insertBefore(input, textEl);
+                input.focus();
+                btn.textContent = '완료';
+            } else {
+                const input = document.getElementById(field + '-input');
+                const newValue = input.value;
+
+                if (field === 'link') {
+                    textEl.href = newValue;
+                    saveProfile('link_url', newValue);
+                } else {
+                    textEl.textContent = newValue;
+                    saveProfile(field, newValue);
+                }
+
+                textEl.style.display = '';
+                input.remove();
+                btn.textContent = '수정';
+            }
+        }
+    </script>
+</body>
+</html>
