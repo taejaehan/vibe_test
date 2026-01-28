@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자기소개</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -12,124 +14,222 @@
         }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            transition: background 0.5s ease;
         }
 
         .card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 500px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 45px;
+            max-width: 550px;
+            width: 100%;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+            animation: slideUp 0.6s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 2.5em;
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .avatar:hover {
+            transform: scale(1.1) rotate(5deg);
         }
 
         h1 {
             color: #667eea;
-            margin-bottom: 20px;
-            font-size: 2em;
+            font-size: 1.8em;
+            font-weight: 700;
+            margin-bottom: 5px;
+            transition: color 0.3s;
+        }
+
+        .user-name {
+            font-size: 1em;
+            color: #999;
+            font-weight: 400;
         }
 
         h2 {
             color: #764ba2;
-            margin: 25px 0 15px;
-            font-size: 1.3em;
+            margin: 30px 0 15px;
+            font-size: 1.1em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        h2::before {
+            content: '📋';
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .info-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.15);
         }
 
         p {
             color: #555;
             line-height: 1.8;
-            margin-bottom: 10px;
+            font-size: 0.95em;
         }
 
         strong {
             color: #667eea;
+            font-weight: 600;
         }
 
         em {
             color: #764ba2;
             font-style: normal;
-            background: #f0e6ff;
-            padding: 2px 8px;
-            border-radius: 5px;
+            background: linear-gradient(135deg, #f0e6ff, #e6f0ff);
+            padding: 3px 10px;
+            border-radius: 8px;
+            font-weight: 500;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
         }
 
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border: none;
+        .contact-item {
+            background: white;
+            border-radius: 15px;
+            padding: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        th {
-            background: #667eea;
-            color: white;
+        .contact-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
 
-        tr:nth-child(even) {
-            background: #f8f8f8;
+        .contact-item .label {
+            font-size: 0.75em;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
         }
 
-        tr:nth-child(odd) td {
-            background: #fff;
+        .contact-item .value {
+            font-size: 0.95em;
+            color: #333;
+            font-weight: 500;
         }
 
-        a {
-            display: inline-block;
+        a.portfolio-link {
+            display: block;
+            text-align: center;
             margin-top: 25px;
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             text-decoration: none;
-            padding: 12px 25px;
-            border-radius: 30px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            padding: 15px 30px;
+            border-radius: 15px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         }
 
-        a:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        a.portfolio-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .color-section {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 2px dashed #eee;
+        }
+
+        .color-section-title {
+            font-size: 0.8em;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-align: center;
         }
 
         .color-buttons {
-            margin-top: 25px;
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            justify-content: center;
             flex-wrap: wrap;
         }
 
         .color-btn {
-            width: 40px;
-            height: 40px;
-            border: 3px solid white;
+            width: 45px;
+            height: 45px;
+            border: 4px solid white;
             border-radius: 50%;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .color-btn:hover {
-            transform: scale(1.2);
+            transform: scale(1.2) rotate(15deg);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
 
         .editable-row {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 10px;
         }
 
         .editable-row p {
-            margin-bottom: 0;
             flex: 1;
         }
 
@@ -137,47 +237,43 @@
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border: none;
-            padding: 5px 14px;
-            border-radius: 15px;
+            padding: 8px 16px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 0.8em;
+            font-size: 0.75em;
+            font-weight: 600;
             white-space: nowrap;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .edit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
         .edit-input {
             flex: 1;
-            padding: 8px 12px;
+            padding: 10px 15px;
             border: 2px solid #667eea;
-            border-radius: 10px;
-            font-size: 0.95em;
-            font-family: 'Segoe UI', sans-serif;
+            border-radius: 12px;
+            font-size: 0.9em;
+            font-family: 'Poppins', sans-serif;
             outline: none;
-            transition: border-color 0.2s;
+            transition: all 0.3s;
         }
 
         .edit-input:focus {
             border-color: #764ba2;
-        }
-
-        td .edit-btn {
-            margin-left: 8px;
-        }
-
-        td .edit-input {
-            width: 100%;
+            box-shadow: 0 0 0 4px rgba(118, 75, 162, 0.1);
         }
 
         .td-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 8px;
+            gap: 10px;
         }
 
         .td-content span {
@@ -186,38 +282,51 @@
 
         .user-tabs {
             display: flex;
-            gap: 8px;
-            margin-bottom: 25px;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
             flex-wrap: wrap;
         }
 
         .user-tab {
-            padding: 10px 18px;
+            padding: 12px 20px;
             border: none;
-            border-radius: 25px;
+            border-radius: 15px;
             cursor: pointer;
-            font-size: 0.9em;
+            font-size: 0.85em;
             font-weight: 600;
+            font-family: 'Poppins', sans-serif;
             transition: all 0.3s;
             color: white;
-            opacity: 0.6;
+            opacity: 0.5;
+            transform: scale(0.95);
         }
 
         .user-tab:hover {
             opacity: 0.8;
-            transform: translateY(-2px);
+            transform: scale(1);
         }
 
         .user-tab.active {
             opacity: 1;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
             transform: scale(1.05);
         }
 
-        .user-name {
-            font-size: 0.9em;
-            color: #888;
-            margin-bottom: 5px;
+        /* 반응형 */
+        @media (max-width: 500px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 30px 20px;
+            }
+
+            .user-tab {
+                padding: 10px 15px;
+                font-size: 0.8em;
+            }
         }
     </style>
 </head>
@@ -227,57 +336,59 @@
             <!-- 유저 탭이 동적으로 생성됩니다 -->
         </div>
 
-        <h1>간단한 자기소개</h1>
-        <p class="user-name" id="user-name-display"></p>
-
-        <div class="editable-row">
-            <p id="intro-text">안녕하세요! 저는 <strong>코딩</strong>을 좋아하는 사람입니다.</p>
-            <button class="edit-btn" onclick="toggleEdit('intro')">수정</button>
+        <div class="profile-header">
+            <div class="avatar" id="avatar">👤</div>
+            <h1 id="profile-title">자기소개</h1>
+            <p class="user-name" id="user-name-display"></p>
         </div>
 
-        <div class="editable-row">
-            <p id="hobby-text">취미는 <em>음악 듣기</em>와 <em>산책</em>입니다.</p>
-            <button class="edit-btn" onclick="toggleEdit('hobby')">수정</button>
+        <div class="info-card">
+            <div class="editable-row">
+                <p id="intro-text">안녕하세요! 저는 <strong>코딩</strong>을 좋아하는 사람입니다.</p>
+                <button class="edit-btn" onclick="toggleEdit('intro')">수정</button>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="editable-row">
+                <p id="hobby-text">취미는 <em>음악 듣기</em>와 <em>산책</em>입니다.</p>
+                <button class="edit-btn" onclick="toggleEdit('hobby')">수정</button>
+            </div>
         </div>
 
         <h2>연락처</h2>
-        <table>
-            <tr>
-                <th>항목</th>
-                <th>내용</th>
-            </tr>
-            <tr>
-                <td>이메일</td>
-                <td>
-                    <div class="td-content">
-                        <span id="email-text">hello@example.com</span>
-                        <button class="edit-btn" onclick="toggleEdit('email')">수정</button>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>전화</td>
-                <td>
-                    <div class="td-content">
-                        <span id="phone-text">010-1234-5678</span>
-                        <button class="edit-btn" onclick="toggleEdit('phone')">수정</button>
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <div class="contact-grid">
+            <div class="contact-item">
+                <div class="label">이메일</div>
+                <div class="td-content">
+                    <span class="value" id="email-text">hello@example.com</span>
+                    <button class="edit-btn" onclick="toggleEdit('email')">수정</button>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="label">전화번호</div>
+                <div class="td-content">
+                    <span class="value" id="phone-text">010-1234-5678</span>
+                    <button class="edit-btn" onclick="toggleEdit('phone')">수정</button>
+                </div>
+            </div>
+        </div>
 
-        <div class="editable-row" style="margin-top: 15px;">
-            <a href="https://www.google.com" id="link-text">구글로 이동</a>
+        <div class="editable-row" style="margin-top: 20px;">
+            <a href="https://www.google.com" id="link-text" class="portfolio-link">포트폴리오 보기</a>
             <button class="edit-btn" onclick="toggleEdit('link')">수정</button>
         </div>
 
-        <div class="color-buttons">
-            <button class="color-btn" style="background: linear-gradient(135deg, #667eea, #764ba2);" onclick="changeColor('#667eea', '#764ba2')"></button>
-            <button class="color-btn" style="background: linear-gradient(135deg, #f093fb, #f5576c);" onclick="changeColor('#f093fb', '#f5576c')"></button>
-            <button class="color-btn" style="background: linear-gradient(135deg, #4facfe, #00f2fe);" onclick="changeColor('#4facfe', '#00f2fe')"></button>
-            <button class="color-btn" style="background: linear-gradient(135deg, #43e97b, #38f9d7);" onclick="changeColor('#43e97b', '#38f9d7')"></button>
-            <button class="color-btn" style="background: linear-gradient(135deg, #fa709a, #fee140);" onclick="changeColor('#fa709a', '#fee140')"></button>
-            <button class="color-btn" style="background: linear-gradient(135deg, #30cfd0, #330867);" onclick="changeColor('#30cfd0', '#330867')"></button>
+        <div class="color-section">
+            <div class="color-section-title">테마 변경</div>
+            <div class="color-buttons">
+                <button class="color-btn" style="background: linear-gradient(135deg, #667eea, #764ba2);" onclick="changeColor('#667eea', '#764ba2')"></button>
+                <button class="color-btn" style="background: linear-gradient(135deg, #f093fb, #f5576c);" onclick="changeColor('#f093fb', '#f5576c')"></button>
+                <button class="color-btn" style="background: linear-gradient(135deg, #4facfe, #00f2fe);" onclick="changeColor('#4facfe', '#00f2fe')"></button>
+                <button class="color-btn" style="background: linear-gradient(135deg, #43e97b, #38f9d7);" onclick="changeColor('#43e97b', '#38f9d7')"></button>
+                <button class="color-btn" style="background: linear-gradient(135deg, #fa709a, #fee140);" onclick="changeColor('#fa709a', '#fee140')"></button>
+                <button class="color-btn" style="background: linear-gradient(135deg, #30cfd0, #330867);" onclick="changeColor('#30cfd0', '#330867')"></button>
+            </div>
         </div>
     </div>
 
@@ -330,12 +441,16 @@
             await loadProfile(userId);
         }
 
+        const avatars = ['👨‍💻', '👩‍🎨', '👨‍🔬', '👩‍💻', '👨‍🚀'];
+
         async function loadProfile(userId) {
             try {
                 const res = await fetch(`/api/profile/${userId}`);
                 const data = await res.json();
 
                 if (data) {
+                    document.getElementById('avatar').textContent = avatars[userId - 1] || '👤';
+                    document.getElementById('profile-title').textContent = data.name || '자기소개';
                     document.getElementById('user-name-display').textContent = data.name ? `@${data.name}` : '';
                     if (data.intro) document.getElementById('intro-text').textContent = data.intro;
                     if (data.hobby) document.getElementById('hobby-text').textContent = data.hobby;
@@ -382,8 +497,15 @@
             document.body.style.background = `linear-gradient(135deg, ${color1} 0%, ${color2} 100%)`;
             document.querySelector('h1').style.color = color1;
             document.querySelector('h2').style.color = color2;
-            document.querySelectorAll('th').forEach(th => th.style.background = color1);
-            document.querySelector('a').style.background = `linear-gradient(135deg, ${color1}, ${color2})`;
+            document.querySelector('.avatar').style.background = `linear-gradient(135deg, ${color1}, ${color2})`;
+            document.querySelector('.avatar').style.boxShadow = `0 10px 30px ${color1}66`;
+            document.querySelector('.portfolio-link').style.background = `linear-gradient(135deg, ${color1}, ${color2})`;
+            document.querySelector('.portfolio-link').style.boxShadow = `0 10px 30px ${color1}4D`;
+            document.querySelectorAll('.info-card').forEach(card => card.style.borderLeftColor = color1);
+            document.querySelectorAll('.edit-btn').forEach(btn => btn.style.background = `linear-gradient(135deg, ${color1}, ${color2})`);
+            document.querySelectorAll('.edit-input').forEach(input => {
+                input.style.borderColor = color1;
+            });
 
             if (save) {
                 saveProfile('color1', color1);
